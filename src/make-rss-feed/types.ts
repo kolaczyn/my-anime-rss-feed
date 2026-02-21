@@ -1,6 +1,12 @@
 export type RssFeed = {
   rss: {
     '@_version': '2.0';
+    // '@_xmlns:atom': 'http://www.w3.org/2005/Atom';
+    // 'atom:link': {
+    //   '@_href': string;
+    //   '@_rel': 'self';
+    //   '@_type': 'application/rss+xml';
+    // };
     channel: RssChannel;
   };
 };
@@ -20,4 +26,5 @@ type RssItem = {
   description: string;
   link: string;
   pubDate: string;
+  // guid: string;
 };

@@ -5,12 +5,12 @@ const uploadFile = async () => {
   const rss = makeRssFeed();
   console.log(rss);
 
-  // console.log('Saving Rss feed...');
-  // const { url } = await put('feed/naruto.rss', rss, {
-  //   access: 'public',
-  //   allowOverwrite: true,
-  // });
-  // console.log('Saved on', url);
+  console.log('Saving Rss feed...');
+  const { url } = await put('feed/naruto.xml', rss, {
+    access: 'public',
+    allowOverwrite: true,
+  });
+  console.log('Saved on', url);
 };
 
 uploadFile();
