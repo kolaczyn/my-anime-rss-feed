@@ -12,15 +12,20 @@
   </head>
   <body>
     <main class="container mt-6">
-      <h1 class="is-size-2">Status Naruto Shippuuden</h1>
-      <h2 id="last-watched" class="is-size-3"></h2>
-      <h2 id="last-updated" class="is-size-6"></h2>
       <div id="progress-wrapper" style="display: none">
+        <h1 class="is-size-2">Status Naruto Shippuuden</h1>
+        <h2 id="last-watched" class="is-size-3"></h2>
+        <h3>
+          W ciągu ostatniego tygodnia obejrzałem
+          <span id="in-last-week"></span>
+        </h3>
         <hr />
         <h3 class="pb-2">
           Obejrzałem już <span id="percent"></span> Naruto Shippuuden:
         </h3>
         <progress class="progress" id="progress" max="500"></progress>
+        <hr />
+        <h2 id="last-updated" class="is-size-6"></h2>
       </div>
     </main>
   </body>
@@ -48,6 +53,28 @@
       const daysDifference = timeDifference / (1000 * 3600 * 24);
       return daysDifference;
     };
+
+    // taken from https://github.com/typeofweb/polish-plurals/blob/master/index.mjs
+    const polishPlurals = (
+      singularNominativ,
+      pluralNominativ,
+      pluralGenitive,
+      value,
+    ) => {
+      value = Math.abs(value);
+      if (value === 1) {
+        return singularNominativ;
+      } else if (
+        value % 10 >= 2 &&
+        value % 10 <= 4 &&
+        (value % 100 < 10 || value % 100 >= 20)
+      ) {
+        return pluralNominativ;
+      } else {
+        return pluralGenitive;
+      }
+    };
+
     /**
      * Taken From https://stackoverflow.com/a/78704662
      * Adapted from https://stackoverflow.com/a/67374710/
@@ -119,6 +146,15 @@
       wrapper.style.display = 'block';
     };
 
+    const howManyEpisodesInLastSevenDays = (response) => {
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      const episodesInLastSevenDays = response.items.filter(
+        (x) => new Date(x.pubDate) - sevenDaysAgo > 0,
+      );
+      document.querySelector('#in-last-week').textContent =
+        `${episodesInLastSevenDays.length} ${polishPlurals('odcinek', 'odcinki', 'odcinków', episodesInLastSevenDays.length)}`;
+    };
+
     const main = async () => {
       const result = await fetchData();
 
@@ -128,6 +164,7 @@
       updateLastWatched(result, episodeTitle);
       updateLastUpdatedEl(result);
       updateProgressBar(result);
+      howManyEpisodesInLastSevenDays(result);
     };
     main();
   </script>
