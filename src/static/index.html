@@ -15,6 +15,13 @@
       <h1 class="is-size-2">Status Naruto Shippuuden</h1>
       <h2 id="last-watched" class="is-size-3"></h2>
       <h2 id="last-updated" class="is-size-6"></h2>
+      <div id="progress-wrapper" style="display: none">
+        <hr />
+        <h3 class="pb-2">
+          Obejrzałem już <span id="percent"></span> Naruto Shippuuden:
+        </h3>
+        <progress class="progress" id="progress" max="500"></progress>
+      </div>
     </main>
   </body>
   <script>
@@ -97,6 +104,21 @@
       lastUpdatedEl.textContent = `Ostatnia aktualizacja: ${formatDate(new Date(response.lastBuildDate))}`;
     };
 
+    const updateProgressBar = (response) => {
+      const lastWatchedEpisode = response.items[0];
+      const progressEl = document.querySelector('#progress');
+      progressEl.setAttribute('value', lastWatchedEpisode.title);
+
+      const percentEl = document.querySelector('#percent');
+      const lastEpNum = lastWatchedEpisode.title;
+      const theProgress = (Number(lastEpNum) / 500) * 100;
+      const rounded = (Math.round(theProgress * 100) / 100).toFixed(1);
+      percentEl.textContent = `${rounded}%`;
+
+      const wrapper = document.querySelector('#progress-wrapper');
+      wrapper.style.display = 'block';
+    };
+
     const main = async () => {
       const result = await fetchData();
 
@@ -105,6 +127,7 @@
 
       updateLastWatched(result, episodeTitle);
       updateLastUpdatedEl(result);
+      updateProgressBar(result);
     };
     main();
   </script>
