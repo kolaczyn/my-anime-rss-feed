@@ -33,7 +33,7 @@ const makeRssFeedJson = (): RssFeed => ({
   },
 });
 
-export const makeRssFeed = () => {
+export const makeRssFeed = async () => {
   const json = makeRssFeedJson();
 
   const builder = new XMLBuilder({

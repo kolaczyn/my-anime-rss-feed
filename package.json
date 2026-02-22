@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vercel/blob": "^2.3.0",
+    "axios": "^1.13.5",
     "fast-xml-parser": "^5.3.7"
   }
 }

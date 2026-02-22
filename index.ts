@@ -1,16 +1,13 @@
-import { put } from '@vercel/blob';
 import { makeRssFeed } from './src/make-rss-feed/make-rss-feed';
+import { getUserInformation } from './src/my-anime-list-api';
+import { uploadFile } from './src/upload-file';
 
-const uploadFile = async () => {
-  const rss = makeRssFeed();
-  console.log(rss);
+const main = async () => {
+  await getUserInformation();
 
-  console.log('Saving Rss feed...');
-  const { url } = await put('feed/naruto.xml', rss, {
-    access: 'public',
-    allowOverwrite: true,
-  });
-  console.log('Saved on', url);
+  const rssFile = await makeRssFeed();
+
+  await uploadFile({ pathname: 'feed/naruto.xml', content: rssFile });
 };
 
-uploadFile();
+main();
