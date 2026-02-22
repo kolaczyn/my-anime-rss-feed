@@ -1,4 +1,4 @@
-import type { EnvVariable as EnvVar } from './types';
+import type { EnvVar } from './types';
 
 export const readEnv = (name: EnvVar): string => {
   const value = process.env[name];

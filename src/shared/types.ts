@@ -3,7 +3,7 @@ export type EpisodeWatchedDate = {
   date: Date;
 };
 
-export type EnvVariable =
+export type EnvVar =
   | 'BLOB_READ_WRITE_TOKEN'
   | 'MAL_CLIENT_ID'
   | 'CODE_CHALLANGE'
