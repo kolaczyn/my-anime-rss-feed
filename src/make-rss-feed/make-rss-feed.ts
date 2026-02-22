@@ -1,16 +1,20 @@
-import { XMLBuilder } from 'fast-xml-parser';
-import type { RssFeed } from './types';
+import { XMLBuilder, type XmlBuilderOptions } from 'fast-xml-parser';
+import type { RssFeed, RssItem } from './types';
+import type { EpisodeWatchedDate } from '../shared/types';
 
-const makeRssFeedJson = (): RssFeed => ({
+const makeRssItem = ({ episode, date }: EpisodeWatchedDate): RssItem => ({
+  title: `Odcinek ${episode}`,
+  description: `Odcinek ${episode}`,
+  //     // TODO, daty muszą być w odpowiednim formacie (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/) oraz musi być informacja o strefie czasowej
+  pubDate: date.toUTCString(),
+  link: 'https://myanimelist.net/profile/kanyastrange',
+});
+
+const makeRssFeedJson = (
+  episodeWatchedDateArr: EpisodeWatchedDate[],
+): RssFeed => ({
   rss: {
     '@_version': '2.0',
-    // '@_xmlns:atom': 'http://www.w3.org/2005/Atom',
-    // 'atom:link': {
-    //   '@_href':
-    //     'https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.xml',
-    //   '@_rel': 'self',
-    //   '@_type': 'application/rss+xml',
-    // },
     channel: {
       title: 'Naruto Shippuuden Status',
       link: 'https://myanimelist.net/profile/kanyastrange',
@@ -19,28 +23,23 @@ const makeRssFeedJson = (): RssFeed => ({
       lastBuildDate: new Date().toUTCString(),
       language: 'pl',
 
-      item: [
-        {
-          title: 'The Tale of Jiraiya the Gallant',
-          description: 'Ep 133',
-          link: 'https://naruto.fandom.com/wiki/The_Tale_of_Jiraiya_the_Gallant_(episode)',
-          // TODO, daty muszą być w odpowiednim formacie (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/)
-          pubDate: new Date('2026-02-21T10:01:00').toUTCString(),
-          // guid: '133',
-        },
-      ],
+      item: episodeWatchedDateArr.map((ep) => makeRssItem(ep)),
     },
   },
 });
 
-export const makeRssFeed = async () => {
-  const json = makeRssFeedJson();
+const xmlBuilderOptions: XmlBuilderOptions = {
+  attributeNamePrefix: '@_',
+  ignoreAttributes: false,
+  format: true,
+};
 
-  const builder = new XMLBuilder({
-    attributeNamePrefix: '@_',
-    ignoreAttributes: false,
-    format: true,
-  });
+export const makeRssFeed = async (
+  episodeWatchedDateArr: EpisodeWatchedDate[],
+) => {
+  const json = makeRssFeedJson(episodeWatchedDateArr);
+
+  const builder = new XMLBuilder(xmlBuilderOptions);
   const xmlContent = builder.build(json);
   return xmlContent;
 };

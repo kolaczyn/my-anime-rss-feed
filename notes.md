@@ -8,6 +8,9 @@
 - Nieoficjalna dokumentacja API MyAnimeListhttps://github.com/SuperMarcus/myanimelist-api-specification
 - Endpoint który zwraca daty obejrzenia odcinków: https://myanimelist.net/ajaxtb.php?keepThis=true&detailedaid=1735
 
+- Specyfikacja RSS https://www.rssboard.org/rss-specification
+- Przykładowy RSS feed: https://www.animenewsnetwork.com/all/rss.xml?ann-edition=us
+
 ## Nowe terminy dla mnie oraz rzeczy do nauki
 
 - PKCE generator - co to?

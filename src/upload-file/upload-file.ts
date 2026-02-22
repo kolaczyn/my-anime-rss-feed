@@ -11,6 +11,7 @@ export const uploadFile = async ({ pathname, content }: Args) => {
   const result = await put(pathname, content, {
     access: 'public',
     allowOverwrite: true,
+    contentType: 'application/rss+xml',
   });
 
   console.log('Saved on', result.url);

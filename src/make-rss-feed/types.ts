@@ -21,7 +21,7 @@ type RssChannel = {
   item: RssItem[];
 };
 
-type RssItem = {
+export type RssItem = {
   title: string;
   description: string;
   link: string;

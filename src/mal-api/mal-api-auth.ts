@@ -1,15 +1,10 @@
 import axios from 'axios';
+import type { OAuthResponse } from './types';
+import { malBearerToken } from './mal-bearer-token';
 
 const API_URL_OAUTH_TOKEN = 'https://myanimelist.net/v1/oauth2/token';
 
-type OAuthResponse = {
-  token_type: string;
-  expires_in: number;
-  access_token: string;
-  refresh_token: string;
-};
-
-export const getAccessToken = async (): Promise<OAuthResponse> => {
+export const fetchAccessToken = async (): Promise<OAuthResponse> => {
   const params = new URLSearchParams({
     client_id: process.env.MAL_CLIENT_ID!,
     grant_type: 'authorization_code',
@@ -34,15 +29,11 @@ export const fetchRefreshToken = async (): Promise<OAuthResponse> => {
   return response.data;
 };
 
-export const getUserInformation = async () => {
+export const fetchUserInformation = async () => {
   const apiUrl =
     'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics';
 
-  const response = await axios.get<unknown>(apiUrl, {
-    headers: {
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-    },
-  });
+  const response = await axios.get<unknown>(apiUrl, malBearerToken);
 
-  return response;
+  return response.data;
 };
