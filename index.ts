@@ -1,8 +1,8 @@
+import { makeJsonFeed } from './src/make-feed/make-json-feed';
 import { makeRssFeed } from './src/make-feed/make-rss-feed';
 import { fetchWatchedDates } from './src/mal-api/mal-api-watched-dates';
 import { extractWatchedDates } from './src/mal-api/mal-extract-watched-dates';
 import { narutoShippuudenId, uploadType } from './src/shared/config';
-import { makeJsonFeed } from './src/make-feed/make-json-feed';
 import { uploadJson, uploadRssFeed } from './src/upload-file/upload-file';
 
 const main = async () => {
