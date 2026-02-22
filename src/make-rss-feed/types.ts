@@ -1,30 +1,34 @@
+export type FeedType = 'rss' | 'json';
+
 export type RssFeed = {
   rss: {
     '@_version': '2.0';
-    // '@_xmlns:atom': 'http://www.w3.org/2005/Atom';
-    // 'atom:link': {
-    //   '@_href': string;
-    //   '@_rel': 'self';
-    //   '@_type': 'application/rss+xml';
-    // };
-    channel: RssChannel;
+    channel: {
+      title: string;
+      link: string;
+      description: string;
+      lastBuildDate: string;
+      language: string;
+
+      item: RssFeedItem[];
+    };
   };
 };
 
-type RssChannel = {
-  title: string;
-  link: string;
-  description: string;
-  lastBuildDate: string;
-  language: string;
-
-  item: RssItem[];
-};
-
-export type RssItem = {
+export type RssFeedItem = {
   title: string;
   description: string;
   link: string;
   pubDate: string;
-  // guid: string;
+};
+
+export type JsonFeed = {
+  title: string;
+  lastBuildDate: Date;
+  items: JsonFeedItem[];
+};
+
+export type JsonFeedItem = {
+  title: string;
+  pubDate: Date;
 };

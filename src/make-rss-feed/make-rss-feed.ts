@@ -1,12 +1,14 @@
 import { XMLBuilder, type XmlBuilderOptions } from 'fast-xml-parser';
-import type { RssFeed, RssItem } from './types';
 import type { EpisodeWatchedDate } from '../shared/types';
+import type { RssFeed, RssFeedItem } from './types';
 
-const makeRssItem = ({ episode, date }: EpisodeWatchedDate): RssItem => ({
+// TODO fix date format (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/)
+const formatDate = (date: Date) => date.toUTCString();
+
+const makeRssItem = ({ episode, date }: EpisodeWatchedDate): RssFeedItem => ({
   title: `Odcinek ${episode}`,
   description: `Odcinek ${episode}`,
-  //     // TODO, daty muszą być w odpowiednim formacie (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/) oraz musi być informacja o strefie czasowej
-  pubDate: date.toUTCString(),
+  pubDate: formatDate(date),
   link: 'https://myanimelist.net/profile/kanyastrange',
 });
 
@@ -19,8 +21,7 @@ const makeRssFeedJson = (
       title: 'Naruto Shippuuden Status',
       link: 'https://myanimelist.net/profile/kanyastrange',
       description: 'Status objerzanych odcinków Anime Shippuuden',
-      // TODO, daty muszą być w odpowiednim formacie (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/)
-      lastBuildDate: new Date().toUTCString(),
+      lastBuildDate: formatDate(new Date()),
       language: 'pl',
 
       item: episodeWatchedDateArr.map((ep) => makeRssItem(ep)),
@@ -34,9 +35,7 @@ const xmlBuilderOptions: XmlBuilderOptions = {
   format: true,
 };
 
-export const makeRssFeed = async (
-  episodeWatchedDateArr: EpisodeWatchedDate[],
-) => {
+export const makeRssFeed = (episodeWatchedDateArr: EpisodeWatchedDate[]) => {
   const json = makeRssFeedJson(episodeWatchedDateArr);
 
   const builder = new XMLBuilder(xmlBuilderOptions);
