@@ -7,7 +7,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/cal-heatmap/dist/cal-heatmap.css"
+    />
     <title>Naruto Shippuuden</title>
   </head>
   <body>
@@ -25,14 +28,26 @@
         </h3>
         <progress class="progress" id="progress" max="500"></progress>
         <hr />
+        <div>
+          <div id="ex-year" className="margin-bottom--md"></div>
+          <div id="ex-year-legend" style="float: 'right'"></div>
+        </div>
+
+        <hr />
         <h2 id="last-updated" class="is-size-6"></h2>
       </div>
     </main>
   </body>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/cal-heatmap.min.js"></script>
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/CalendarLabel.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
+  <script src="https://unpkg.com/cal-heatmap/dist/plugins/Legend.min.js"></script>
+
   <script>
     const fetchData = async () => {
-      const feedUrl =
-        `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.json?random=${Math.random()}`
+      const feedUrl = `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.json?random=${Math.random()}`;
       const response = await fetch(feedUrl);
       return await response.json();
     };
@@ -155,16 +170,78 @@
         `${episodesInLastSevenDays.length} ${polishPlurals('odcinek', 'odcinki', 'odcinków', episodesInLastSevenDays.length)}`;
     };
 
+    const makeHeatmap = (firstEpisode) => {
+      console.log(firstEpisode);
+      const cal = new CalHeatmap();
+      cal.paint(
+        {
+          data: {
+            source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv?random=${Math.random()}`,
+            type: 'tsv',
+            x: 'date',
+            y: (d) => +d['watched'],
+            groupY: 'max',
+          },
+          date: {
+            start: new Date(firstEpisode),
+            locale: 'pl',
+          },
+          range: 2,
+          scale: { color: { type: 'linear', scheme: 'PRGn', domain: [0, 40] } },
+          domain: {
+            type: 'year',
+            label: { text: null },
+          },
+          subDomain: { type: 'day', radius: 2 },
+          itemSelector: '#ex-year',
+        },
+        [
+          [
+            Tooltip,
+            {
+              text: function (date, value, dayjsDate) {
+                return (
+                  (value ? value + '°C' : 'No data') +
+                  ' on ' +
+                  dayjsDate.format('LL')
+                );
+              },
+            },
+          ],
+          [
+            Legend,
+            {
+              tickSize: 0,
+              width: 150,
+              itemSelector: '#ex-year-legend',
+            },
+          ],
+          [
+            CalendarLabel,
+            {
+              width: 30,
+              textAlign: 'start',
+              text: () =>
+                dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? '' : d)),
+            },
+          ],
+        ],
+      );
+    };
+
     const main = async () => {
       const result = await fetchData();
 
       const lastWatchedEpisode = result.items[0];
+      const firstWatchedEpisodeDate = result.items.at(-1).pubDate;
       const episodeTitle = await fetchEpisodeTitle(lastWatchedEpisode.title);
 
       updateLastWatched(result, episodeTitle);
       updateLastUpdatedEl(result);
       updateProgressBar(result);
       howManyEpisodesInLastSevenDays(result);
+
+      makeHeatmap(firstWatchedEpisodeDate);
     };
     main();
   </script>
