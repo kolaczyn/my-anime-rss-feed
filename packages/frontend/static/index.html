@@ -71,6 +71,12 @@
   <script src="https://unpkg.com/cal-heatmap/dist/plugins/Tooltip.min.js"></script>
   <script src="https://unpkg.com/cal-heatmap/dist/plugins/LegendLite.min.js"></script>
 
+  <style>
+    .highlight {
+      fill: pink !important;
+    }
+  </style>
+
   <script>
     const fetchData = async () => {
       const feedUrl = `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.json?random=${Math.random()}`;
@@ -197,6 +203,7 @@
     };
 
     const makeHeatmap = (firstEpisode) => {
+      const dateFinishedNaruto = new Date('2025-07-15');
       const cal = new CalHeatmap();
 
       cal.paint(
@@ -209,6 +216,8 @@
             groupY: 'max',
           },
           date: {
+            // date of finishing Naruto
+            highlight: [dateFinishedNaruto],
             start: new Date(firstEpisode),
             locale: 'pl',
           },
@@ -238,11 +247,16 @@
           [
             Tooltip,
             {
-              text: function (date, value, dayjsDate) {
+              text: (date, value, dayjsDate) => {
+                const additional =
+                  date === dateFinishedNaruto.getTime()
+                    ? '. Dzień skończenia oglądania Naruto'
+                    : '';
                 return (
                   (value ? value : '0') +
                   ' w ' +
-                  dayjsDate.format('dddd, MMMM D, YYYY')
+                  dayjsDate.format('dddd, MMMM D, YYYY') +
+                  additional
                 );
               },
             },
