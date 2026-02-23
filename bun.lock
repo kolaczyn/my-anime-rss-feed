@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "anime-rss",
+      "name": "workspaces",
     },
     "packages/feed": {
       "name": "@app/feed",
@@ -23,12 +23,6 @@
     },
     "packages/frontend": {
       "name": "@app/frontend",
-      "dependencies": {
-        "@vercel/blob": "^2.3.0",
-        "axios": "^1.13.5",
-        "cheerio": "^1.2.0",
-        "fast-xml-parser": "^5.3.7",
-      },
       "devDependencies": {
         "@types/bun": "latest",
         "prettier": "^3.8.1",

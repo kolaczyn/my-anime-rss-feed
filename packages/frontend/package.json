@@ -12,11 +12,5 @@
   },
   "peerDependencies": {
     "typescript": "^5"
-  },
-  "dependencies": {
-    "@vercel/blob": "^2.3.0",
-    "axios": "^1.13.5",
-    "cheerio": "^1.2.0",
-    "fast-xml-parser": "^5.3.7"
   }
 }
