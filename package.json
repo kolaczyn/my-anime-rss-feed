@@ -4,11 +4,11 @@
   "module": "packages/feed/index.ts",
   "type": "module",
   "scripts": {
-	"feed": "bun --filter @app/feed start",
-	"frontend": "bun --filter @app/frontend dev",
-	"types": "bun run --filter '*' types"
+    "feed": "bun --filter @app/feed start",
+    "frontend": "bun --filter @app/frontend dev",
+    "types": "bun run --filter '*' types"
   },
   "workspaces": [
-	"packages/*"
+    "packages/*"
   ]
 }
