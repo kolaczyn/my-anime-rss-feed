@@ -1,25 +1,5 @@
 import { put, type PutCommandOptions } from '@vercel/blob';
 
-type UploadRssFeedArgs = {
-  pathname: string;
-  content: string;
-};
-
-export const uploadRssFeed = async ({
-  pathname,
-  content,
-}: UploadRssFeedArgs) => {
-  console.log('Saving Rss feed...');
-
-  const result = await put(pathname, content, {
-    access: 'public',
-    allowOverwrite: true,
-    contentType: 'application/rss+xml',
-  });
-
-  console.log('Saved Rss feed on', result.url);
-};
-
 type UploadJsonArgs = {
   pathname: `${string}.json`;
   content: object;
@@ -34,4 +14,19 @@ export const uploadJson = async ({ pathname, content }: UploadJsonArgs) => {
   });
 
   console.log('Saved json on', result.url);
+};
+
+type UploadTsvArgs = {
+  pathname: `${string}.tsv`;
+  content: string;
+};
+
+export const uploadTsv = async ({ pathname, content }: UploadTsvArgs) => {
+  console.log('Saving tsv...');
+
+  const result = await put(pathname, content, {
+    access: 'public',
+    allowOverwrite: true,
+  });
+  console.log('Saved tsv on', result.url);
 };
