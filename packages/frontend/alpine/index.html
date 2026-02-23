@@ -7,6 +7,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
     />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
 
     <title>Naruto Shippuuden</title>
   </head>
@@ -29,7 +33,15 @@
       </div>
     </main>
   </body>
-  <script>
+  <script type="module">
+    import {
+      updateProgressBar,
+      updateLastUpdatedEl,
+      updateLastWatched,
+      howManyEpisodesInLastSevenDays,
+    } from '/js/manipulate-dom.js';
+    import { fetchData, fetchEpisodeTitle } from '/js/fetch.js';
+
     const main = async () => {
       const result = await fetchData();
 
@@ -41,6 +53,13 @@
       updateProgressBar(result);
       howManyEpisodesInLastSevenDays(result);
     };
+
     main();
+
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('searchInput', () => ({
+        hello: 'world',
+      }));
+    });
   </script>
 </html>

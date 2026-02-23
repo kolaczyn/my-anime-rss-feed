@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <title>Naruto Shippuuden</title>
+  </head>
+  <body>
+    <main class="container mt-6">
+      <span x-data="searchInput">
+        <span x-text="hello"></span>
+      </span>
+    </main>
+  </body>
+  <script type="module">
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('searchInput', () => ({
+        hello: 'world',
+      }));
+    });
+  </script>
+</html>
