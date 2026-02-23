@@ -12,7 +12,7 @@ const main = async () => {
   if (uploadType === 'json') {
     const feed = makeJsonFeed(episodesNum);
     await uploadJson({
-      pathname: 'feed/testing/naruto.json',
+      pathname: 'feed/naruto.json',
       content: feed,
     });
   } else {
