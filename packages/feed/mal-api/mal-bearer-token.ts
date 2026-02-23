@@ -1,5 +1,5 @@
 import type { AxiosRequestConfig } from 'axios';
-import { readEnv } from '../shared/read-env';
+import { readEnv } from '../shared/read-env.ts';
 
 export const malBearerToken: AxiosRequestConfig = {
   headers: {

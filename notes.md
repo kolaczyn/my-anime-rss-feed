@@ -20,3 +20,9 @@
   - wytłumaczenie jest tutaj: https://stackoverflow.com/questions/10703532/whats-the-point-of-refresh-token
 - może zrobić dekotator który loguje przed i po wykonaniu promise'a?
 - znaleźć alternatywę do Axios, która nie wyrzuca błędu jeśli jest error (żeby było bardziej w stylu programowania funkcyjnego)
+
+## Monorepo bun cheat sheet
+
+```
+bun install --filter "@app/frontend" is-even
+```

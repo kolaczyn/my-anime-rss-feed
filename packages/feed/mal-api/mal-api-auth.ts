@@ -1,7 +1,7 @@
 import axios from 'axios';
-import type { OAuthResponse } from './types';
-import { malBearerToken } from './mal-bearer-token';
-import { readEnv } from '../shared/read-env';
+import type { OAuthResponse } from './types.ts';
+import { malBearerToken } from './mal-bearer-token.ts';
+import { readEnv } from '../shared/read-env.ts';
 
 const API_URL_OAUTH_TOKEN = 'https://myanimelist.net/v1/oauth2/token';
 

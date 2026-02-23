@@ -1,5 +1,5 @@
-import type { EpisodeWatchedDate } from '../shared/types';
-import type { JsonFeed } from './types';
+import type { EpisodeWatchedDate } from '../shared/types.ts';
+import type { JsonFeed } from './types.ts';
 
 export const makeJsonFeed = (episodes: EpisodeWatchedDate[]): JsonFeed => ({
   title: 'Naruto Shippuuden',

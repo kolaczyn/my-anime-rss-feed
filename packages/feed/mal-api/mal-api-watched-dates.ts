@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { malBearerToken } from './mal-bearer-token';
+import { malBearerToken } from './mal-bearer-token.ts';
 
 export const fetchWatchedDates = async (animeId: number) => {
   console.log('Fetching episodes data...');
