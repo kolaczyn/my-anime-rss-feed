@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import type { EpisodeWatchedDate } from '../shared/types';
+import type { EpisodeWatchedDate } from '../shared/types.ts';
 
 const extractTextFromHtml = (html: string): string[] => {
   const $ = cheerio.load(html);

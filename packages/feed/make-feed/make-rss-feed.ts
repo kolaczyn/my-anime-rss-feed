@@ -1,6 +1,6 @@
 import { XMLBuilder, type XmlBuilderOptions } from 'fast-xml-parser';
-import type { EpisodeWatchedDate } from '../shared/types';
-import type { RssFeed, RssFeedItem } from './types';
+import type { EpisodeWatchedDate } from '../shared/types.ts';
+import type { RssFeed, RssFeedItem } from './types.ts';
 
 // TODO fix date format (https://whitep4nth3r.com/blog/how-to-format-dates-for-rss-feeds-rfc-822/)
 const formatDate = (date: Date) => date.toUTCString();

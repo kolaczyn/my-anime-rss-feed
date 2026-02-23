@@ -1,0 +1,22 @@
+{
+  "name": "@app/frontend",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+	"dev": "bun run index.ts",
+    "types": "bun tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.3.0",
+    "axios": "^1.13.5",
+    "cheerio": "^1.2.0",
+    "fast-xml-parser": "^5.3.7"
+  }
+}

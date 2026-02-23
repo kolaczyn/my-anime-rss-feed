@@ -1,19 +1,14 @@
 {
-  "name": "anime-rss",
-  "module": "index.ts",
-  "type": "module",
+  "name": "workspaces",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest",
-    "prettier": "^3.8.1"
+  "module": "packages/feed/index.ts",
+  "type": "module",
+  "scripts": {
+	"feed": "bun --filter @app/feed start",
+	"frontend": "bun --filter @app/frontend dev",
+	"types": "bun run --filter '*' types"
   },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@vercel/blob": "^2.3.0",
-    "axios": "^1.13.5",
-    "cheerio": "^1.2.0",
-    "fast-xml-parser": "^5.3.7"
-  }
+  "workspaces": [
+	"packages/*"
+  ]
 }
