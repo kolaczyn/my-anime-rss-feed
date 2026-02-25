@@ -26,28 +26,46 @@
             <span id="in-last-week"></span>
           </h3>
           <hr />
-          <h3 class="pb-2">
-            Obejrzałem już <span id="percent"></span> Naruto Shippuuden:
-          </h3>
-          <div style="display: grid; grid-template-columns: 220fr 500fr">
-            <progress
-              title="Progress dla 220 odcinków Naruto"
-              value="220"
-              class="progress is-primary"
-              id="progress-naruto"
-              max="220"
-              style="border-top-right-radius: 0; border-bottom-right-radius: 0"
-            ></progress>
-            <progress
-              title="Progress dla 500 odcinków Naruto Shippuuden"
-              class="progress is-warning"
-              id="progress-shippuuden"
-              max="500"
-              style="border-top-left-radius: 0; border-bottom-left-radius: 0"
-            ></progress>
+          <div>
+            <div style="display: grid; grid-template-columns: 220fr 500fr">
+              <div>
+                <h3 class="pb-2">Obejrzałem wszystkie 220 odcinków Naruto</h3>
+                <progress
+                  title="Progress dla 220 odcinków Naruto"
+                  value="220"
+                  class="progress is-primary"
+                  id="progress-naruto"
+                  max="220"
+                  style="
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                  "
+                ></progress>
+              </div>
+              <div>
+                <h3 class="pb-2 has-text-right">
+                  Obejrzałem już <span id="percent"></span> z 500 odcinków
+                  Naruto Shippuuden
+                </h3>
+                <progress
+                  title="Progress dla 500 odcinków Naruto Shippuuden"
+                  class="progress is-warning"
+                  id="progress-shippuuden"
+                  max="500"
+                  style="
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                  "
+                ></progress>
+              </div>
+            </div>
+            <h3 class="pt-2 has-text-centered">
+              Obejrzałem już <span id="percent-all"></span> z 720 odcinków
+              Naruto + Naruto Shippuuden
+            </h3>
           </div>
           <hr />
-          <h3>Heatmapa odcinków Naruto + Shippuuden</h3>
+          <h3 class="mb-2">Heatmapa odcinków Naruto + Shippuuden</h3>
           <div
             style="
               background: #22272d;

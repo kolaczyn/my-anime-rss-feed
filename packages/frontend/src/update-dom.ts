@@ -1,6 +1,6 @@
 import type { JsonFeed } from "./types.ts";
 import { formatDate, prettyDate } from "./date-utils.ts";
-import { polishPlurals } from "./utils.ts";
+import { calcRounded, polishPlurals } from "./utils.ts";
 
 export const updateLastWatched = (response: JsonFeed, episodeTitle: string) => {
   const lastWatchedEpisode = response.items[0];
@@ -25,9 +25,13 @@ export const updateProgressBar = (response: JsonFeed) => {
 
   const percentEl = document.querySelector("#percent")!;
   const lastEpNum = lastWatchedEpisode.title;
-  const theProgress = (Number(lastEpNum) / 500) * 100;
-  const rounded = (Math.round(theProgress * 100) / 100).toFixed(1);
-  percentEl.textContent = `${rounded}%`;
+
+  percentEl.textContent = calcRounded(lastEpNum, 500);
+
+  document.querySelector("#percent-all")!.textContent = calcRounded(
+    220 + Number(lastEpNum),
+    220 + 500,
+  );
 
   const wrapper = document.querySelector<HTMLDivElement>("#progress-wrapper")!;
   wrapper.style.display = "block";

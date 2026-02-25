@@ -18,3 +18,9 @@ export const polishPlurals = (
     return pluralGenitive;
   }
 };
+
+export const calcRounded = (current: number | string, total: number) => {
+  const theProgress = (Number(current) / total) * 100;
+  const rounded = (Math.round(theProgress * 100) / 100).toFixed(1);
+  return `${rounded}%`;
+};
