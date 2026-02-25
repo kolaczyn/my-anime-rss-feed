@@ -1,6 +1,10 @@
+import LegendLite from "cal-heatmap/plugins/LegendLite";
+import CalendarLabel from "cal-heatmap/plugins/CalendarLabel";
+import Tooltip from "cal-heatmap/plugins/Tooltip";
+
 const dateFinishedNaruto = new Date("2025-07-15");
 
-export const heatmapConfig = (firstEpisode: Date) => ({
+export const heatmapConfig = (firstEpisode: string) => ({
   data: {
     source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv?random=${Math.random()}`,
     type: "tsv",

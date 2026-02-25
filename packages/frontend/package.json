@@ -16,6 +16,7 @@
     "vite": "^8.0.0-beta.13"
   },
   "dependencies": {
+    "cal-heatmap": "^4.2.4",
     "prettier": "^3.8.1"
   }
 }

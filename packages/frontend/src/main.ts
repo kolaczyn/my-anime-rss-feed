@@ -1,3 +1,5 @@
+import CalHeatmap from "cal-heatmap";
+import "cal-heatmap/cal-heatmap.css";
 import { heatmapConfig, heatmapPlugins } from "./heatmap-config.ts";
 import { fetchData, fetchEpisodeTitle } from "./api.ts";
 import {
@@ -7,7 +9,7 @@ import {
   updateProgressBar,
 } from "./update-dom.ts";
 
-const makeHeatmap = (firstEpisode: Date) => {
+const makeHeatmap = (firstEpisode: string) => {
   const cal = new CalHeatmap();
 
   cal.paint(heatmapConfig(firstEpisode), heatmapPlugins);
