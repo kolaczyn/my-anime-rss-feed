@@ -18,7 +18,9 @@ export const updateLastUpdatedEl = (response: JsonFeed) => {
 
 export const updateProgressBar = (response: JsonFeed) => {
   const lastWatchedEpisode = response.items[0];
-  const progressEl = document.querySelector<HTMLProgressElement>("#progress")!;
+  const progressEl = document.querySelector<HTMLProgressElement>(
+    "#progress-shippuuden",
+  )!;
   progressEl.setAttribute("value", lastWatchedEpisode.title);
 
   const percentEl = document.querySelector("#percent")!;
