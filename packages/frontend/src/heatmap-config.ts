@@ -75,6 +75,7 @@ export const heatmapPlugins = [
     {
       width: 30,
       textAlign: "start",
+      // @ts-expect-error
       text: () => dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? "" : d)),
       padding: [25, 0, 0, 0],
     },

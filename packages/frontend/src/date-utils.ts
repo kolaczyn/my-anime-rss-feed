@@ -28,11 +28,13 @@ export const formatDate = (createTime: Date) => {
     style: "long",
   });
 
-  const diff = createTime - new Date();
+  const now = new Date();
+  const diff = +createTime - +now;
   for (const interval in intervals) {
     if (intervals[interval] <= Math.abs(diff)) {
       return relativeDateFormat.format(
         Math.trunc(diff / intervals[interval]),
+        // @ts-expect-error
         interval,
       );
     }

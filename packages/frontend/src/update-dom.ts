@@ -40,7 +40,7 @@ export const updateProgressBar = (response: JsonFeed) => {
 export const howManyEpisodesInLastSevenDays = (response: JsonFeed) => {
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
   const episodesInLastSevenDays = response.items.filter(
-    (x) => new Date(x.pubDate) - sevenDaysAgo > 0,
+    (x) => +new Date(x.pubDate) - +sevenDaysAgo > 0,
   );
   document.querySelector("#in-last-week")!.textContent =
     `${episodesInLastSevenDays.length} ${polishPlurals("odcinek", "odcinki", "odcinków", episodesInLastSevenDays.length)}`;

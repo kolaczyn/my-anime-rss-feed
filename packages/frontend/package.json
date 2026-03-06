@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:with-checking-types": "tsc && vite build",
+    "types": "tsc",
     "preview": "vite preview"
   },
   "devDependencies": {
