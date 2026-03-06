@@ -36,7 +36,6 @@ const extractInfoFromText = (text: string): EpisodeWatchedDate => {
 
 export const extractWatchedDates = (html: string): EpisodeWatchedDate[] => {
   const episodesText = extractTextFromHtml(html);
-  console.log(episodesText);
 
   return episodesText.map((text) => extractInfoFromText(text));
 };

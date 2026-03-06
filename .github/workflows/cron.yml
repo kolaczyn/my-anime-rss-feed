@@ -5,8 +5,7 @@ on:
   schedule:
     - cron: "0 * * * *"
 env:
-  # this will probably expire around March 24th
-  ACCESS_TOKEN: "${{ secrets.ACCESS_TOKEN }}"
+  REFRESH_TOKEN: "${{ secrets.REFRESH_TOKEN }}"
   BLOB_READ_WRITE_TOKEN: "${{ secrets.BLOB_READ_WRITE_TOKEN }}"
 
 jobs:
