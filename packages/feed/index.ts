@@ -5,13 +5,13 @@ import { extractWatchedDates } from './mal-api/mal-extract-watched-dates.ts';
 import { narutoId, narutoShippuudenId } from './shared/config.ts';
 import { uploadFile } from './upload-file/upload-file.ts';
 
-const getNarutoEpisodes = async () => {
+const getNarutoPartOneEpisodes = async () => {
   const watchedDatesHtml = await fetchWatchedDates(narutoId);
   const episodesNum = extractWatchedDates(watchedDatesHtml);
   return episodesNum;
 };
 
-const getNarutoShippuudenEpisodes = async () => {
+const getNarutoPartTwoEpisodes = async () => {
   const watchedDatesHtml = await fetchWatchedDates(narutoShippuudenId);
   const episodesNum = extractWatchedDates(watchedDatesHtml);
   return episodesNum;
@@ -19,8 +19,8 @@ const getNarutoShippuudenEpisodes = async () => {
 
 const main = async () => {
   const [epNaruto, epNarutoShippuuden] = await Promise.all([
-    getNarutoEpisodes(),
-    getNarutoShippuudenEpisodes(),
+    getNarutoPartOneEpisodes(),
+    getNarutoPartTwoEpisodes(),
   ]);
   await Promise.all([
     uploadFile({
