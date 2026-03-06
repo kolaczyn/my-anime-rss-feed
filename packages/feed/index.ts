@@ -8,6 +8,9 @@ import { narutoId, shippuudenId } from './shared/config.ts';
 import { uploadFile } from './upload-file/upload-file.ts';
 import type { EpisodeData, EpisodeFullData } from './shared/types.ts';
 
+// This fixes timezone issues in Github actions
+process.env.TZ = 'Europe/Warsaw';
+
 const getAnimeData = (animeId: number) => {
   // this is not very generic, but whatever :p
   const dbToUse = animeId === 20 ? narutoDb : shippudenDb;
