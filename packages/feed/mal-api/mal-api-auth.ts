@@ -1,7 +1,7 @@
-import axios from 'axios';
 import type { OAuthResponse } from './types.ts';
 import { malBearerToken } from './mal-bearer-token.ts';
 import { readEnv } from '../shared/read-env.ts';
+import { axiosClient } from '../shared/axios-client.ts';
 
 const API_URL_OAUTH_TOKEN = 'https://myanimelist.net/v1/oauth2/token';
 
@@ -13,20 +13,28 @@ export const fetchAccessToken = async (): Promise<OAuthResponse> => {
     code_verifier: readEnv('CODE_CHALLANGE'),
   });
 
-  const response = await axios.post<OAuthResponse>(API_URL_OAUTH_TOKEN, params);
+  const response = await axiosClient.post<OAuthResponse>(
+    API_URL_OAUTH_TOKEN,
+    params,
+  );
 
   return response.data;
 };
 
 export const fetchRefreshToken = async (): Promise<OAuthResponse> => {
+  console.log('Fetching refresh token...');
   const params = new URLSearchParams({
     client_id: readEnv('MAL_CLIENT_ID'),
     grant_type: 'refresh_token',
     refresh_token: readEnv('REFRESH_TOKEN'),
   });
 
-  const response = await axios.post<OAuthResponse>(API_URL_OAUTH_TOKEN, params);
+  const response = await axiosClient.post<OAuthResponse>(
+    API_URL_OAUTH_TOKEN,
+    params,
+  );
 
+  console.log('Finished fetching refresh token.');
   return response.data;
 };
 
@@ -34,7 +42,7 @@ export const fetchUserInformation = async () => {
   const apiUrl =
     'https://api.myanimelist.net/v2/users/@me?fields=anime_statistics';
 
-  const response = await axios.get<unknown>(apiUrl, malBearerToken);
+  const response = await axiosClient.get<unknown>(apiUrl, malBearerToken);
 
   return response.data;
 };
