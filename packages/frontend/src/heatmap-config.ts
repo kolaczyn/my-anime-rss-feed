@@ -12,6 +12,7 @@ export const heatmapConfig = (firstEpisode: string) => ({
     y: (d) => +d["watched"],
     groupY: "max",
   },
+  animationDuration: 125,
   date: {
     // date of finishing Naruto
     highlight: [dateFinishedNaruto],
