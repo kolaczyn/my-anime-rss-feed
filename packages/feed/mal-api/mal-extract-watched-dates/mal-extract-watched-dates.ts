@@ -16,7 +16,6 @@ const watchedRegex =
   /Ep (\d*), watched on (\d*)\/(\d*)\/(\d*) at (\d*):(\d*) Remove/;
 
 const extractInfoFromText = (text: string): EpisodeWatchedDate => {
-  console.log(watchedRegex.exec(text));
   const [_full, episodeNum, month, day, year, hour, minute] =
     watchedRegex.exec(text)!;
 
