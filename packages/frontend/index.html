@@ -17,11 +17,11 @@
   </head>
   <body>
     <div id="app">
-      <main class="container mt-6">
+      <main class="container mt-6 px-4">
         <div id="progress-wrapper" style="display: none">
-          <h1 class="is-size-2">Status Naruto Shippuuden</h1>
-          <h2 id="last-watched" class="is-size-3"></h2>
-          <h3>
+          <h1 class="is-size-3">Progress Naruto</h1>
+          <h2 id="last-watched" class="is-size-4"></h2>
+          <h3 class="is-size-5">
             W ciągu ostatniego tygodnia obejrzałem
             <span id="in-last-week"></span>
           </h3>
@@ -29,7 +29,20 @@
           <div>
             <div style="display: grid; grid-template-columns: 220fr 500fr">
               <div>
-                <h3 class="pb-2">Obejrzałem wszystkie 220 odcinków Naruto</h3>
+                <h3 class="pb-2">
+                  <span class="is-hidden-mobile">Obejrzałem</span>
+                  100% Naruto
+                </h3>
+              </div>
+              <div>
+                <h3 class="pb-2 has-text-right">
+                  <span class="is-hidden-mobile">Obejrzałem</span>
+                  <span id="percent"></span> Shippuuden
+                </h3>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 220fr 500fr">
+              <div>
                 <progress
                   title="Progress dla 220 odcinków Naruto"
                   value="220"
@@ -43,10 +56,6 @@
                 ></progress>
               </div>
               <div>
-                <h3 class="pb-2 has-text-right">
-                  Obejrzałem już <span id="percent"></span> z 500 odcinków
-                  Naruto Shippuuden
-                </h3>
                 <progress
                   title="Progress dla 500 odcinków Naruto Shippuuden"
                   class="progress is-warning"
@@ -60,8 +69,8 @@
               </div>
             </div>
             <h3 class="pt-2 has-text-centered">
-              Obejrzałem już <span id="percent-all"></span> z 720 odcinków
-              Naruto + Naruto Shippuuden
+              <span class="is-hidden-mobile">Obejrzałem</span>
+              <span id="percent-all"></span> Naruto + Shippuuden
             </h3>
           </div>
           <hr />
