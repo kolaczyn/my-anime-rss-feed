@@ -6,5 +6,6 @@ export type JsonFeed = {
 
 export type JsonFeedItem = {
   title: string;
+  episodeTitle: string;
   pubDate: Date;
 };

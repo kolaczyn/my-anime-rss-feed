@@ -3,6 +3,13 @@ export type EpisodeWatchedDate = {
   date: Date;
 };
 
+export type EpisodeData = {
+  filler: boolean;
+  title: string;
+};
+
+export type EpisodeFullData = EpisodeWatchedDate & EpisodeData;
+
 export type EnvVar =
   | 'BLOB_READ_WRITE_TOKEN'
   | 'MAL_CLIENT_ID'
