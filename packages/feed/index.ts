@@ -3,7 +3,7 @@ import { makeTsvFeed } from './make-feed/make-tsv-feed.ts';
 import { fetchWatchedDates } from './mal-api/mal-api-watched-dates.ts';
 import { extractWatchedDates } from './mal-api/mal-extract-watched-dates.ts';
 import { narutoId, narutoShippuudenId } from './shared/config.ts';
-import { uploadJson, uploadTsv } from './upload-file/upload-file.ts';
+import { uploadFile } from './upload-file/upload-file.ts';
 
 const getNarutoEpisodes = async () => {
   const watchedDatesHtml = await fetchWatchedDates(narutoId);
@@ -23,11 +23,11 @@ const main = async () => {
     getNarutoShippuudenEpisodes(),
   ]);
   await Promise.all([
-    uploadJson({
+    uploadFile({
       pathname: 'feed/naruto.json',
-      content: makeJsonFeed(epNarutoShippuuden),
+      content: JSON.stringify(makeJsonFeed(epNarutoShippuuden)),
     }),
-    uploadTsv({
+    uploadFile({
       pathname: 'feed/naruto.tsv',
       content: makeTsvFeed([...epNaruto, ...epNarutoShippuuden]),
     }),
