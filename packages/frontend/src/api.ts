@@ -5,11 +5,3 @@ export const fetchData = async (): Promise<JsonFeed> => {
   const response = await fetch(feedUrl);
   return await response.json();
 };
-
-export const fetchEpisodeTitle = async (episodeNumber: string) => {
-  const narutoShippuudenId = 1735;
-  const apiUrl = `https://api.jikan.moe/v4/anime/${narutoShippuudenId}/episodes/${episodeNumber}`;
-  const response = await fetch(apiUrl);
-  const json = await response.json();
-  return json.data.title;
-};

@@ -1,7 +1,7 @@
 import CalHeatmap from "cal-heatmap";
 import "cal-heatmap/cal-heatmap.css";
 import { heatmapConfig, heatmapPlugins } from "./heatmap-config.ts";
-import { fetchData, fetchEpisodeTitle } from "./api.ts";
+import { fetchData } from "./api.ts";
 import {
   howManyEpisodesInLastSevenDays,
   updateLastUpdatedEl,
@@ -25,9 +25,8 @@ const makeHeatmap = (firstEpisode: string) => {
 const main = async () => {
   const result = await fetchData();
 
-  const lastWatchedEpisode = result.items[0];
   const firstWatchedEpisodeDate = result.items.at(-1)!.pubDate;
-  const episodeTitle = await fetchEpisodeTitle(lastWatchedEpisode.title);
+  const episodeTitle = result.items[0].episodeTitle;
 
   updateLastWatched(result, episodeTitle);
   updateLastUpdatedEl(result);
