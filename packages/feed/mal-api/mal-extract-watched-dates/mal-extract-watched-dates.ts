@@ -1,18 +1,22 @@
 import * as cheerio from 'cheerio';
-import type { EpisodeWatchedDate } from '../shared/types.ts';
+import type { EpisodeWatchedDate } from '../../shared/types.ts';
 
 const extractTextFromHtml = (html: string): string[] => {
   const $ = cheerio.load(html);
 
-  return $('.spaceit_pad')
+  const text = $('.spaceit_pad')
     .map((_, el) => $(el).text())
     .get();
+
+  const cleanedUp = text.map((x) => x.replaceAll('\n', '').trim());
+  return cleanedUp;
 };
 
 const watchedRegex =
   /Ep (\d*), watched on (\d*)\/(\d*)\/(\d*) at (\d*):(\d*) Remove/;
 
 const extractInfoFromText = (text: string): EpisodeWatchedDate => {
+  console.log(watchedRegex.exec(text));
   const [_full, episodeNum, month, day, year, hour, minute] =
     watchedRegex.exec(text)!;
 
@@ -32,6 +36,7 @@ const extractInfoFromText = (text: string): EpisodeWatchedDate => {
 
 export const extractWatchedDates = (html: string): EpisodeWatchedDate[] => {
   const episodesText = extractTextFromHtml(html);
+  console.log(episodesText);
 
   return episodesText.map((text) => extractInfoFromText(text));
 };
