@@ -15,8 +15,32 @@
       }
       html {
         min-height: 100vh;
-        background: linear-gradient(135deg, #fffaf3, #fff1e0);
-        background: linear-gradient(135deg, #fff7ed, #ffe4c7, #ffd6a5);
+      }
+      hr {
+        background: #fff6e5;
+      }
+      :root {
+        background: linear-gradient(
+          120deg,
+          #fff6e5,
+          #ffd8a8,
+          #f7bc81,
+          #ffd8a8,
+          #fff6e5
+        );
+        background-size: 400% 400%;
+        animation: narutoGradient 8s ease-in-out infinite;
+      }
+      @keyframes narutoGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
     </style>
   </head>
@@ -81,7 +105,7 @@
           <hr />
           <div
             style="
-              background: #22272d;
+              background: #0f172a;
               color: white;
               border-radius: 3px;
               padding: 1rem;
@@ -92,7 +116,9 @@
               min-height: 232px;
             "
           >
-            <h3 class="mb-2">Heatmapa odcinków Naruto + Shippuuden</h3>
+            <h3 class="mb-2 has-text-weight-bold">
+              Heatmapa odcinków Naruto + Shippuuden
+            </h3>
             <div class="mb-3" id="ex-ghDay"></div>
             <div>
               <button class="button is-small" id="heatmap-previous">
