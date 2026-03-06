@@ -9,10 +9,10 @@ import {
   updateProgressBar,
 } from "./update-dom.ts";
 
-const makeHeatmap = (firstEpisode: string) => {
+const makeHeatmap = () => {
   const cal = new CalHeatmap();
 
-  cal.paint(heatmapConfig(firstEpisode), heatmapPlugins);
+  cal.paint(heatmapConfig, heatmapPlugins);
 
   document
     .querySelector<HTMLButtonElement>("#heatmap-previous")!
@@ -25,7 +25,6 @@ const makeHeatmap = (firstEpisode: string) => {
 const main = async () => {
   const result = await fetchData();
 
-  const firstWatchedEpisodeDate = result.items.at(-1)!.pubDate;
   const episodeTitle = result.items[0].episodeTitle;
 
   updateLastWatched(result, episodeTitle);
@@ -33,6 +32,6 @@ const main = async () => {
   updateProgressBar(result);
   howManyEpisodesInLastSevenDays(result);
 
-  makeHeatmap(firstWatchedEpisodeDate);
+  makeHeatmap();
 };
 main();
