@@ -4,6 +4,19 @@ import Tooltip from "cal-heatmap/plugins/Tooltip";
 
 const dateFinishedNaruto = new Date("2025-07-15");
 
+const getTomorrow = () => {
+  const result = new Date();
+  result.setDate(result.getDate() + 1);
+  return result;
+};
+
+const getYearAgo = () => {
+  const result = new Date();
+  result.setFullYear(result.getFullYear() - 1);
+  result.setMonth(result.getMonth() + 1);
+  return result;
+};
+
 export const heatmapConfig = (firstEpisode: string) => ({
   data: {
     source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv?random=${Math.random()}`,
@@ -16,8 +29,9 @@ export const heatmapConfig = (firstEpisode: string) => ({
   date: {
     // date of finishing Naruto
     highlight: [dateFinishedNaruto],
-    start: new Date(firstEpisode),
+    start: getYearAgo(),
     locale: "pl",
+    max: getTomorrow(),
   },
   range: 12,
   scale: {
