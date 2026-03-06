@@ -5,22 +5,13 @@ import { extractWatchedDates } from './mal-api/mal-extract-watched-dates/mal-ext
 import { narutoId, narutoShippuudenId } from './shared/config.ts';
 import { uploadFile } from './upload-file/upload-file.ts';
 
-const getNarutoPartOneEpisodes = async () => {
-  const watchedDatesHtml = await fetchWatchedDates(narutoId);
-  const episodesNum = extractWatchedDates(watchedDatesHtml);
-  return episodesNum;
-};
-
-const getNarutoPartTwoEpisodes = async () => {
-  const watchedDatesHtml = await fetchWatchedDates(narutoShippuudenId);
-  const episodesNum = extractWatchedDates(watchedDatesHtml);
-  return episodesNum;
-};
+const fetchAndExtractWatchedDates = (animeId: number) =>
+  fetchWatchedDates(animeId).then((html) => extractWatchedDates(html));
 
 const main = async () => {
   const [epNaruto, epNarutoShippuuden] = await Promise.all([
-    getNarutoPartOneEpisodes(),
-    getNarutoPartTwoEpisodes(),
+    fetchAndExtractWatchedDates(narutoId),
+    fetchAndExtractWatchedDates(narutoShippuudenId),
   ]);
   await Promise.all([
     uploadFile({
