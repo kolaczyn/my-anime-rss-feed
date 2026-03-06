@@ -37,5 +37,10 @@ const extractInfoFromText = (text: string): EpisodeWatchedDate => {
 export const extractWatchedDates = (html: string): EpisodeWatchedDate[] => {
   const episodesText = extractTextFromHtml(html);
 
-  return episodesText.map((text) => extractInfoFromText(text));
+  const results = episodesText.map((text) => extractInfoFromText(text));
+
+  if (results.length == 0) {
+    throw new Error('Something went wrong, could not find any episodes');
+  }
+  return results;
 };
