@@ -1,3 +1,4 @@
+import "./styles.css";
 import CalHeatmap from "cal-heatmap";
 import "cal-heatmap/cal-heatmap.css";
 import { heatmapConfig, heatmapPlugins } from "./heatmap-config.ts";
