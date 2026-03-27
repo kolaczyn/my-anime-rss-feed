@@ -1,6 +1,7 @@
 import { fetchAndExtractWatchedDates } from './make-feed/fetch-and-extract-watched-dates.ts';
 import { makeJsonFeed } from './make-feed/make-json-feed.ts';
 import { makeTsvFeed } from './make-feed/make-tsv-feed.ts';
+import { fetchAccessToken } from './mal-api/mal-api-auth.ts';
 import { narutoId, shippuudenId } from './shared/config.ts';
 import { uploadFile } from './upload-file/upload-file.ts';
 
@@ -8,9 +9,11 @@ import { uploadFile } from './upload-file/upload-file.ts';
 process.env.TZ = 'Europe/Warsaw';
 
 const main = async () => {
+  const accessToken = (await fetchAccessToken()).access_token;
+
   const [epNaruto, epShippuuden] = await Promise.all([
-    fetchAndExtractWatchedDates(narutoId),
-    fetchAndExtractWatchedDates(shippuudenId),
+    fetchAndExtractWatchedDates(narutoId, accessToken),
+    fetchAndExtractWatchedDates(shippuudenId, accessToken),
   ]);
   await Promise.all([
     uploadFile({

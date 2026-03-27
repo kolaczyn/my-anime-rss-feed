@@ -1,8 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
-import { readEnv } from '../shared/read-env.ts';
 
-export const malBearerToken: AxiosRequestConfig = {
+export const malBearerToken = (accessToken: string): AxiosRequestConfig => ({
   headers: {
-    Authorization: `Bearer ${readEnv('ACCESS_TOKEN')}`,
+    Authorization: `Bearer ${accessToken}`,
   },
-};
+});

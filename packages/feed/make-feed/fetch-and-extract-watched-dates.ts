@@ -22,9 +22,10 @@ const getAnimeData = (animeId: number) => {
 
 export const fetchAndExtractWatchedDates = async (
   animeId: number,
+  accessToken: string,
 ): Promise<EpisodeFullData[]> => {
-  const watchedDates = await fetchWatchedDates(animeId).then((html) =>
-    extractWatchedDates(html),
+  const watchedDates = await fetchWatchedDates(animeId, accessToken).then(
+    (html) => extractWatchedDates(html),
   );
 
   const animeData = getAnimeData(animeId);
