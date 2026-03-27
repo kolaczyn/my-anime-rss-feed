@@ -1,6 +1,14 @@
 import type { EpisodeFullData } from '../shared/types.ts';
 import type { JsonFeedV2 } from './types.ts';
 
+const getEpisodesInLastSevenDays = (episodes: EpisodeFullData[]): number => {
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const episodesInLastSevenDays = episodes.filter(
+    (x) => +new Date(x.date) - +sevenDaysAgo > 0,
+  );
+  return episodesInLastSevenDays.length;
+};
+
 export const makeJsonFeedV2 = (episodes: EpisodeFullData[]): JsonFeedV2 => {
   const lastEp = episodes[0];
   if (!lastEp) {
@@ -14,10 +22,12 @@ export const makeJsonFeedV2 = (episodes: EpisodeFullData[]): JsonFeedV2 => {
       title: lastEp.title,
       episodeNumber: lastEp.episode,
       wikiUrl: `https://naruto.fandom.com/wiki/${lastEp.title}`,
+      watchDate: lastEp.date,
     },
     totalWatched: {
       naruto: 220,
       shippuden: lastEp.episode,
+      lastSevenDays: getEpisodesInLastSevenDays(episodes),
     },
   };
 };

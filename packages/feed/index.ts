@@ -22,7 +22,7 @@ const main = async () => {
       content: JSON.stringify(makeJsonFeed(epShippuuden)),
     }),
     uploadFile({
-      pathname: 'feed/v2/narutov.json',
+      pathname: 'feed/v2/naruto.json',
       content: JSON.stringify(makeJsonFeedV2(epShippuuden)),
     }),
     uploadFile({
