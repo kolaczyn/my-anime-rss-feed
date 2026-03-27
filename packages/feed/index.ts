@@ -1,5 +1,5 @@
 import { fetchAndExtractWatchedDates } from './make-feed/fetch-and-extract-watched-dates.ts';
-import { makeJsonFeedV2 } from './make-feed/make-json-feed-v2.ts';
+import { makeJsonFeed } from './make-feed/make-json-feed.ts';
 import { makeTsvFeed } from './make-feed/make-tsv-feed.ts';
 import { fetchAccessToken } from './mal-api/mal-api-auth.ts';
 import { narutoId, shippuudenId } from './shared/config.ts';
@@ -18,7 +18,7 @@ const main = async () => {
   await Promise.all([
     uploadFile({
       pathname: 'feed/v2/naruto.json',
-      content: JSON.stringify(makeJsonFeedV2(epShippuuden)),
+      content: JSON.stringify(makeJsonFeed(epShippuuden)),
     }),
     uploadFile({
       pathname: 'feed/naruto.tsv',

@@ -1,5 +1,5 @@
 import type { EpisodeFullData } from '../shared/types.ts';
-import type { JsonFeedV2 } from './types.ts';
+import type { JsonFeed } from './types.ts';
 
 const getEpisodesInLastSevenDays = (episodes: EpisodeFullData[]): number => {
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -9,7 +9,7 @@ const getEpisodesInLastSevenDays = (episodes: EpisodeFullData[]): number => {
   return episodesInLastSevenDays.length;
 };
 
-export const makeJsonFeedV2 = (episodes: EpisodeFullData[]): JsonFeedV2 => {
+export const makeJsonFeed = (episodes: EpisodeFullData[]): JsonFeed => {
   const lastEp = episodes[0];
   if (!lastEp) {
     throw new Error(

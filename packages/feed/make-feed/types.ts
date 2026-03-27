@@ -1,4 +1,4 @@
-export type JsonFeedV2 = {
+export type JsonFeed = {
   buildDate: Date;
   lastWatchedEpisode: {
     title: string;
