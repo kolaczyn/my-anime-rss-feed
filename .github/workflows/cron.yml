@@ -8,6 +8,7 @@ on:
   schedule:
     - cron: "0 0,5,11,19,23 * * *"
 env:
+  MAL_CLIENT_ID: "${{ secrets.MAL_CLIENT_ID }}"
   REFRESH_TOKEN: "${{ secrets.REFRESH_TOKEN }}"
   BLOB_READ_WRITE_TOKEN: "${{ secrets.BLOB_READ_WRITE_TOKEN }}"
 
