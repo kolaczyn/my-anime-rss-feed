@@ -3,8 +3,8 @@ name: Run Bot
 on:
   workflow_dispatch:
   push:
-    - branches:
-        - main
+    branches:
+      - main
   schedule:
     - cron: "0 0,5,11,19,23 * * *"
 env:
