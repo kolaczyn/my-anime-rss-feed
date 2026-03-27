@@ -5,7 +5,7 @@ export type JikanApiEpisodeDto = {
 };
 
 // TODO share frontend and backend types. But there's difference - date is string instead of Date
-export type JsonFeedV2 = {
+export type JsonFeed = {
   buildDate: string;
   lastWatchedEpisode: {
     title: string;
@@ -19,3 +19,8 @@ export type JsonFeedV2 = {
     lastSevenDays: number;
   };
 };
+
+export type HeatmapSource = {
+  date: string;
+  value: number;
+}[];

@@ -1,18 +1,19 @@
 import CalHeatmap from "cal-heatmap";
 import "cal-heatmap/cal-heatmap.css";
 import { heatmapConfig, heatmapPlugins } from "./heatmap-config.ts";
-import { fetchData } from "./api.ts";
+import { fetchData, fetchHeatmapSource } from "./api.ts";
 import {
   howManyEpisodesInLastSevenDays,
   updateLastUpdatedEl,
   updateLastWatched,
   updateProgressBar,
 } from "./update-dom.ts";
+import type { HeatmapSource } from "./types.ts";
 
-const makeHeatmap = () => {
+const makeHeatmap = (heatmapSource: HeatmapSource) => {
   const cal = new CalHeatmap();
 
-  cal.paint(heatmapConfig, heatmapPlugins);
+  cal.paint(heatmapConfig(heatmapSource), heatmapPlugins);
 
   document
     .querySelector<HTMLButtonElement>("#heatmap-previous")!
@@ -23,13 +24,16 @@ const makeHeatmap = () => {
 };
 
 const main = async () => {
-  const result = await fetchData();
+  const [dto, heatmapSource] = await Promise.all([
+    fetchData(),
+    fetchHeatmapSource(),
+  ]);
 
-  updateLastWatched(result);
-  updateLastUpdatedEl(result);
-  updateProgressBar(result);
-  howManyEpisodesInLastSevenDays(result);
+  updateLastWatched(dto);
+  updateLastUpdatedEl(dto);
+  updateProgressBar(dto);
+  howManyEpisodesInLastSevenDays(dto);
 
-  makeHeatmap();
+  makeHeatmap(heatmapSource);
 };
 main();

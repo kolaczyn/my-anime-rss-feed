@@ -12,3 +12,8 @@ export type JsonFeed = {
     lastSevenDays: number;
   };
 };
+
+export type HeatmapSource = {
+  date: string;
+  value: number;
+}[];

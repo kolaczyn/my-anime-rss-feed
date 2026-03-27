@@ -1,7 +1,7 @@
-import LegendLite from "cal-heatmap/plugins/LegendLite";
 import CalendarLabel from "cal-heatmap/plugins/CalendarLabel";
+import LegendLite from "cal-heatmap/plugins/LegendLite";
 import Tooltip from "cal-heatmap/plugins/Tooltip";
-import { storageSuffix } from "./storage-suffix";
+import type { HeatmapSource } from "./types";
 
 const dateFinishedNaruto = new Date("2025-07-15");
 
@@ -18,12 +18,13 @@ const getYearAgo = () => {
   return result;
 };
 
-export const heatmapConfig = {
+export const heatmapConfig = (source: HeatmapSource) => ({
   data: {
-    source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv${storageSuffix}`,
-    type: "tsv",
+    source,
     x: "date",
-    y: (d) => +d["watched"],
+    y: (d) => {
+      return +d["value"];
+    },
     groupY: "max",
   },
   animationDuration: 125,
@@ -55,7 +56,7 @@ export const heatmapConfig = {
     gutter: 4,
   },
   itemSelector: "#ex-ghDay",
-};
+});
 
 export const heatmapPlugins = [
   [

@@ -1,9 +1,9 @@
 import { expect, test } from 'bun:test';
 import type { EpisodeWatchedDate } from '../shared/types';
-import { makeTsvFeed } from './make-tsv-feed';
+import { makeHeatmapSource } from './make-heatmap-source';
 
-test('make-tsv-feed', () => {
-  expect(makeTsvFeed(exampleData)).toMatchInlineSnapshot(`
+test('make-heatmap-source', () => {
+  expect(makeHeatmapSource(exampleData)).toMatchInlineSnapshot(`
     "date	watched
     2025-07-03	1
     2025-07-02	2"
