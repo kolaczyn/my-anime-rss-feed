@@ -9,3 +9,16 @@ export type JsonFeedItem = {
   episodeTitle: string;
   pubDate: Date;
 };
+
+export type JsonFeedV2 = {
+  buildDate: Date;
+  lastWatchedEpisode: {
+    title: string;
+    episodeNumber: number;
+    wikiUrl: string;
+  };
+  totalWatched: {
+    naruto: number;
+    shippuden: number;
+  };
+};
