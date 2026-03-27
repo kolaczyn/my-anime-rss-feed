@@ -5,12 +5,6 @@ import type { HeatmapSource } from "./types";
 
 const dateFinishedNaruto = new Date("2025-07-15");
 
-const getTomorrow = () => {
-  const result = new Date();
-  result.setDate(result.getDate() + 1);
-  return result;
-};
-
 const getYearAgo = () => {
   const result = new Date();
   result.setFullYear(result.getFullYear() - 1);
@@ -33,7 +27,6 @@ export const heatmapConfig = (source: HeatmapSource) => ({
     highlight: [dateFinishedNaruto],
     start: getYearAgo(),
     locale: "pl",
-    max: getTomorrow(),
   },
   range: 12,
   scale: {
