@@ -15,5 +15,4 @@ export type EnvVar =
   | 'MAL_CLIENT_ID'
   | 'CODE_CHALLANGE'
   | 'AUTH_CODE'
-  | 'ACCESS_TOKEN'
   | 'REFRESH_TOKEN';
