@@ -17,9 +17,11 @@ const getYearAgo = () => {
   return result;
 };
 
+const storageSuffix = import.meta.env.PROD ? "" : `?random=${Math.random()}`;
+
 export const heatmapConfig = {
   data: {
-    source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv?random=${Math.random()}`,
+    source: `https://w6d9sazgkqmr96r5.public.blob.vercel-storage.com/feed/naruto.tsv${storageSuffix}`,
     type: "tsv",
     x: "date",
     y: (d) => +d["watched"],
