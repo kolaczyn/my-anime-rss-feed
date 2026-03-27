@@ -3,11 +3,16 @@ import type { EpisodeWatchedDate } from '../shared/types';
 import { makeHeatmapSource } from './make-heatmap-source';
 
 test('make-heatmap-source', () => {
-  expect(makeHeatmapSource(exampleData)).toMatchInlineSnapshot(`
-    "date	watched
-    2025-07-03	1
-    2025-07-02	2"
-  `);
+  expect(makeHeatmapSource(exampleData)).toEqual([
+    {
+      date: '2025-07-03',
+      value: 1,
+    },
+    {
+      date: '2025-07-02',
+      value: 2,
+    },
+  ]);
 });
 
 const exampleData: EpisodeWatchedDate[] = [
