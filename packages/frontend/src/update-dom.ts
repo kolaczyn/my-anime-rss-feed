@@ -1,30 +1,30 @@
-import type { JsonFeed } from "./types.ts";
 import { formatDate, prettyDate } from "./date-utils.ts";
-import { calcRounded, polishPlurals } from "./utils.ts";
+import { episodesPlural } from "./plurals.ts";
+import type { JsonFeedV2 } from "./types.ts";
+import { calcRounded } from "./utils.ts";
 
-export const updateLastWatched = (response: JsonFeed, episodeTitle: string) => {
-  const lastWatchedEpisode = response.items[0];
-
-  const wikiUrl = `https://naruto.fandom.com/wiki/${episodeTitle.replaceAll(" ", "_")}`;
+export const updateLastWatched = ({
+  lastWatchedEpisode: { wikiUrl, episodeNumber, title },
+  buildDate,
+}: JsonFeedV2) => {
   const lastWatchedEl = document.querySelector("#last-watched")!;
-  const watchedDate = new Date(lastWatchedEpisode.pubDate);
-  lastWatchedEl.innerHTML = `Ostatnio obejrzałem odcinek <a href="${wikiUrl}">#${lastWatchedEpisode.title} "${episodeTitle}"</a> ${formatDate(watchedDate)} (${prettyDate(watchedDate)})`;
+  const watchedDate = new Date(buildDate);
+  lastWatchedEl.innerHTML = `Ostatnio obejrzałem odcinek <a href="${wikiUrl}">#${episodeNumber} "${title}"</a> ${formatDate(watchedDate)} (${prettyDate(watchedDate)})`;
 };
 
-export const updateLastUpdatedEl = (response: JsonFeed) => {
-  const lastUpdatedEl = document.querySelector("#last-updated")!;
-  lastUpdatedEl.textContent = `Ostatnia aktualizacja: ${formatDate(new Date(response.lastBuildDate))}`;
+export const updateLastUpdatedEl = (response: JsonFeedV2) => {
+  document.querySelector("#last-updated")!.textContent =
+    `Ostatnia aktualizacja: ${formatDate(new Date(response.buildDate))}`;
 };
 
-export const updateProgressBar = (response: JsonFeed) => {
-  const lastWatchedEpisode = response.items[0];
+export const updateProgressBar = ({ totalWatched }: JsonFeedV2) => {
   const progressEl = document.querySelector<HTMLProgressElement>(
     "#progress-shippuuden",
   )!;
-  progressEl.setAttribute("value", lastWatchedEpisode.title);
+  progressEl.setAttribute("value", totalWatched.shippuden.toString());
 
   const percentEl = document.querySelector("#percent")!;
-  const lastEpNum = lastWatchedEpisode.title;
+  const lastEpNum = totalWatched.shippuden;
 
   percentEl.textContent = calcRounded(lastEpNum, 500);
 
@@ -37,11 +37,9 @@ export const updateProgressBar = (response: JsonFeed) => {
   wrapper.style.display = "block";
 };
 
-export const howManyEpisodesInLastSevenDays = (response: JsonFeed) => {
-  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const episodesInLastSevenDays = response.items.filter(
-    (x) => +new Date(x.pubDate) - +sevenDaysAgo > 0,
-  );
+export const howManyEpisodesInLastSevenDays = ({
+  totalWatched: { lastSevenDays },
+}: JsonFeedV2) => {
   document.querySelector("#in-last-week")!.textContent =
-    `${episodesInLastSevenDays.length} ${polishPlurals("odcinek", "odcinki", "odcinków", episodesInLastSevenDays.length)}`;
+    `${lastSevenDays} ${episodesPlural(lastSevenDays)}`;
 };

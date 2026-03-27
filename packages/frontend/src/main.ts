@@ -25,9 +25,7 @@ const makeHeatmap = () => {
 const main = async () => {
   const result = await fetchData();
 
-  const episodeTitle = result.items[0].episodeTitle;
-
-  updateLastWatched(result, episodeTitle);
+  updateLastWatched(result);
   updateLastUpdatedEl(result);
   updateProgressBar(result);
   howManyEpisodesInLastSevenDays(result);
