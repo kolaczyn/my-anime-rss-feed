@@ -1,6 +1,7 @@
 import LegendLite from "cal-heatmap/plugins/LegendLite";
 import CalendarLabel from "cal-heatmap/plugins/CalendarLabel";
 import Tooltip from "cal-heatmap/plugins/Tooltip";
+import { storageSuffix } from "./storage-suffix";
 
 const dateFinishedNaruto = new Date("2025-07-15");
 
@@ -16,8 +17,6 @@ const getYearAgo = () => {
   result.setMonth(result.getMonth() + 1);
   return result;
 };
-
-const storageSuffix = import.meta.env.PROD ? "" : `?random=${Math.random()}`;
 
 export const heatmapConfig = {
   data: {
