@@ -16,12 +16,16 @@ const makeHeatmap = (heatmapSource: HeatmapSource) => {
 
   cal.paint(heatmapConfig(heatmapSource), heatmapPlugins);
 
-  document
-    .querySelector<HTMLButtonElement>("#heatmap-previous")!
-    .addEventListener("click", () => cal.previous());
-  document
-    .querySelector<HTMLButtonElement>("#heatmap-next")!
-    .addEventListener("click", () => cal.next());
+  const btnPrev =
+    document.querySelector<HTMLButtonElement>("#heatmap-previous")!;
+  const btnNext = document.querySelector<HTMLButtonElement>("#heatmap-next")!;
+
+  btnPrev.addEventListener("click", () => cal.previous());
+  btnNext.addEventListener("click", () => cal.next());
+
+  cal.on("maxDateReached", () => {
+    btnNext.setAttribute("disabled", "true");
+  });
 };
 
 const main = async () => {

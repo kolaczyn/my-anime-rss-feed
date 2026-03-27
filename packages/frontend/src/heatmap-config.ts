@@ -5,12 +5,20 @@ import type { HeatmapSource } from "./types";
 
 const dateFinishedNaruto = new Date("2025-07-15");
 
+const getTomorrow = () => {
+  const result = new Date();
+  result.setDate(result.getDate() + 1);
+  return result;
+};
+
 const getYearAgo = () => {
   const result = new Date();
   result.setFullYear(result.getFullYear() - 1);
   result.setMonth(result.getMonth() + 1);
   return result;
 };
+
+const isMobile = window.innerWidth < 1000;
 
 export const heatmapConfig = (source: HeatmapSource) => ({
   data: {
@@ -27,6 +35,8 @@ export const heatmapConfig = (source: HeatmapSource) => ({
     highlight: [dateFinishedNaruto],
     start: getYearAgo(),
     locale: "pl",
+    // You can't scroll on mobile
+    max: isMobile ? null : getTomorrow(),
   },
   range: 12,
   scale: {
