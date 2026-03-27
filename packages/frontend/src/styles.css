@@ -1,3 +1,7 @@
+.highlight {
+  /* filter: brightness(150%); */
+  fill: greenyellow !important;
+}
 html {
   min-height: 100vh;
 }
